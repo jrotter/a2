@@ -1,4 +1,4 @@
-require 'armadillo/artifact'
+require 'armadillo/test_artifact'
 #require 'armadillo/application'
 #require 'armadillo/page'
 #require 'armadillo/region'
