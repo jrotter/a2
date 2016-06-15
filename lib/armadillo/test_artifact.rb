@@ -23,10 +23,48 @@ module Armadillo
       @start_time = nil
       @stop_time = nil
       @status = "ready"
+      @pre_routine = nil
+      @post_routine = nil
     end
 
 
-    # Indicated that an artifact has been started
+    # Define a routine to run before this artifact runs
+    #
+    # *Options*
+    #
+    # +block+:: specifies the block of code to run before the artifact runs
+    #
+    # *Example*
+    #
+    #   a = Armadillo::TestArtifact.new()
+    #   a.set_pre_routine {
+    #     puts "Artifact is about to run"
+    #   }
+    #
+    def set_pre_routine(&block)
+      @pre_routine = block
+    end
+
+
+    # Define a routine to run after this artifact completes
+    #
+    # *Options*
+    #
+    # +block+:: specifies the block of code to run after the artifact completes
+    #
+    # *Example*
+    #
+    #   a = Armadillo::TestArtifact.new()
+    #   a.set_post_routine {
+    #     puts "Artifact is done running"
+    #   }
+    #
+    def set_post_routine(&block)
+      @post_routine = block
+    end
+
+
+    # Indicated that an artifact has been started and run the pre-routine if applicable
     #
     # *Options*
     #
@@ -41,18 +79,15 @@ module Armadillo
       @success = true #artifact is successful until it isn't
       @status = "running"
       @start_time = Time.now
-  
-      # I can define a pre- and post-execution method to be invoked by the parent via "super".  Look it up!
-  
-      # Or, more simply, I can invoke the pre- and post-execution methods via start and stop
+      @pre_routine.call if @pre_routine
     end
 
 
-    # Indicated that an artifact has been stopped
+    # Indicate that an artifact has been stopped and run the post-routine if applicable
     #
     # *Options*
     #
-    # none
+    # +success+:: specifies whether the application completed succesfully (true) or not (false)
     #
     # *Example*
     #
@@ -68,6 +103,7 @@ module Armadillo
         @status = "failed"
       end
       @stop_time = Time.now
+      @post_routine.call if @post_routine
     end
 
 

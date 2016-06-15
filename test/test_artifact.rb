@@ -72,5 +72,59 @@ class ArtifactTest < Minitest::Test
     assert a.stop_time.is_a? Time
   end
 
+  def test_artifact_pre_routine_success
+    @testval = "hello"
+    a = Armadillo::TestArtifact.new()
+    a.set_pre_routine { @testval = "goodbye" }
+    assert @testval == "hello"
+    a.start
+
+    assert @testval == "goodbye"
+    @testval = "helloagain"
+
+    a.stop(true)
+    assert @testval == "helloagain"
+  end
+
+  def test_artifact_pre_routine_failure
+    @testval = "hello"
+    a = Armadillo::TestArtifact.new()
+    a.set_pre_routine { @testval = "goodbye" }
+    assert @testval == "hello"
+
+    a.start
+    assert @testval == "goodbye"
+    @testval = "helloagain"
+
+    a.stop(false)
+    assert @testval == "helloagain"
+  end
+
+  def test_artifact_pre_routine_success
+    @testval = "hello"
+    a = Armadillo::TestArtifact.new()
+    a.set_post_routine { @testval = "goodbye" }
+    assert @testval == "hello"
+    a.start
+
+    assert @testval == "hello"
+
+    a.stop(true)
+    assert @testval == "goodbye"
+  end
+
+  def test_artifact_pre_routine_failure
+    @testval = "hello"
+    a = Armadillo::TestArtifact.new()
+    a.set_post_routine { @testval = "goodbye" }
+    assert @testval == "hello"
+
+    a.start
+    assert @testval == "hello"
+
+    a.stop(false)
+    assert @testval == "goodbye"
+  end
+
 end
 
