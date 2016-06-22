@@ -25,6 +25,8 @@ module Armadillo
       @status = "ready"
       @pre_routine = nil
       @post_routine = nil
+      @log = nil
+      @html_log = nil
     end
 
 
