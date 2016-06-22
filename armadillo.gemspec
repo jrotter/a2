@@ -7,7 +7,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "minitest", [">= 0"]
   s.authors     = ["Jeremy Rotter"]
   s.email       = 'jeremy.rotter@gmail.com'
-  s.files       = ['lib/armadillo.rb']
+  s.files       = ['lib/armadillo.rb',
+                   'lib/armadillo/test_artifact.rb']
   s.homepage    = 'https://github.com/jrotter/armadillo'
   s.license     = 'MIT'
 end
