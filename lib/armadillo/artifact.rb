@@ -158,7 +158,7 @@ module Armadillo
     #   a.completed_successfully?
     #
     def completed_successfully?
-      @success and (@status == "passed")
+      @start_time and @success and (@status == "passed")
     end
 
 

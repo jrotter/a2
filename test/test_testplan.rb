@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'armadillo'
 
 
-class ArtifactTest < Minitest::Test
+class TestplanTest < Minitest::Test
 
   def setup
     # Any setup tasks should go here
@@ -14,8 +14,8 @@ class ArtifactTest < Minitest::Test
   # Artifact
   #
   ##################################################
-  def test_artifact_end_to_end_success
-    a = Armadillo::TestArtifact.new()
+  def test_testplan_artifact_end_to_end_success
+    a = Armadillo::Testplan.new()
     assert !a.started? 
     assert !a.completed?
     assert !a.completed_successfully?
@@ -43,8 +43,8 @@ class ArtifactTest < Minitest::Test
     assert a.stop_time.is_a? Time
   end
 
-  def test_artifact_end_to_end_failure
-    a = Armadillo::TestArtifact.new()
+  def test_testplan_artifact_end_to_end_failure
+    a = Armadillo::Testplan.new()
     assert !a.started? 
     assert !a.completed?
     assert !a.completed_successfully?
@@ -72,9 +72,9 @@ class ArtifactTest < Minitest::Test
     assert a.stop_time.is_a? Time
   end
 
-  def test_artifact_pre_routine_success
+  def test_testplan_artifact_pre_routine_success
     @testval = "hello"
-    a = Armadillo::TestArtifact.new()
+    a = Armadillo::Testplan.new()
     a.set_pre_routine { @testval = "goodbye" }
     assert @testval == "hello"
     a.start
@@ -86,9 +86,9 @@ class ArtifactTest < Minitest::Test
     assert @testval == "helloagain"
   end
 
-  def test_artifact_pre_routine_failure
+  def test_testplan_artifact_pre_routine_failure
     @testval = "hello"
-    a = Armadillo::TestArtifact.new()
+    a = Armadillo::Testplan.new()
     a.set_pre_routine { @testval = "goodbye" }
     assert @testval == "hello"
 
@@ -100,9 +100,9 @@ class ArtifactTest < Minitest::Test
     assert @testval == "helloagain"
   end
 
-  def test_artifact_post_routine_success
+  def test_testplan_artifact_post_routine_success
     @testval = "hello"
-    a = Armadillo::TestArtifact.new()
+    a = Armadillo::Testplan.new()
     a.set_post_routine { @testval = "goodbye" }
     assert @testval == "hello"
     a.start
@@ -113,9 +113,9 @@ class ArtifactTest < Minitest::Test
     assert @testval == "goodbye"
   end
 
-  def test_artifact_post_routine_failure
+  def test_testplan_artifact_post_routine_failure
     @testval = "hello"
-    a = Armadillo::TestArtifact.new()
+    a = Armadillo::Testplan.new()
     a.set_post_routine { @testval = "goodbye" }
     assert @testval == "hello"
 

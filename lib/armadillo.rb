@@ -1,8 +1,7 @@
-require 'armadillo/test_artifact'
-#require 'armadillo/application'
-#require 'armadillo/page'
-#require 'armadillo/region'
-#require 'armadillo/control'
+require 'armadillo/artifact'
+require 'armadillo/script'
+require 'armadillo/testplan'
+require 'armadillo/testcase'
 
 # [cat]  something
 # something else
